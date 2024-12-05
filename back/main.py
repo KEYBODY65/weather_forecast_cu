@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify, json
 from req import req, get_weather_data
 
 
@@ -7,8 +7,7 @@ app.config["SECRET_KEY"] = "yfdwk64qowyerhr124429478293"
 
 @app.route("/")
 def main():
-    print(get_weather_data())
-    return "Hello, World!"
+    return json.dumps(get_weather_data(), indent=4)
 
 
 
