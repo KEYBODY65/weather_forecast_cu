@@ -1,5 +1,5 @@
 import requests
-api_key = '0RvWYG0TzMAt1XOemk0dwSBWGyAjKVjs'
+api_key = ''
 city = 'Москва'
 location_url = f'http://dataservice.accuweather.com/locations/v1/cities/search?apikey={api_key}&q={city}&language=ru'
 
