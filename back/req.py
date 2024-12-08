@@ -1,9 +1,10 @@
 import requests
-API_KEY = 'd9E3GspKBOCQyA5I9MIpBldoilHzbfwy'
+API_KEY = '5SZCug5qTPnRKDRHRTf493qAuGzz5LoM'
 
 
 
 def req(city):
+    """Получение кординат"""
     location_url = f'http://dataservice.accuweather.com/locations/v1/cities/search?apikey={API_KEY}&q={city}&language=ru'
     try:
         response = requests.get(location_url)
@@ -17,6 +18,7 @@ def req(city):
         return None
 
 def get_loc_code_by_coords(city):
+    """Функция для получения гео-ключа по кординатам"""
     city_cor = f'{city[0]},{city[1]}'
     location_url = f'http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey={API_KEY}&q={city_cor}'
     try:
@@ -41,12 +43,12 @@ def get_weather_data(loc_key):
         weather_data = weather_r.json()[0]
         temperature_celsius = weather_data['Temperature']['Metric']['Value']
         humidity_percentage = weather_data['RelativeHumidity']
-        wind_speed_kh = weather_data['Wind']['Speed']['Metric']['Value']
+        wind_speed =  round(weather_data['Wind']['Speed']['Metric']['Value'] * 0.2778, 2)
         precipitation_probability = 0 if not weather_data['HasPrecipitation'] else 100
         wet_info = {
             'temperature_celsius': temperature_celsius,
             'humidity_percentage': f'{humidity_percentage}%',
-            'wind_speed_kh': wind_speed_kh,
+            'wind_speed': wind_speed,
             'precipitation_probability': precipitation_probability
         }
         return wet_info

@@ -13,13 +13,31 @@ def main():
     if request.method == "POST":  # Проверяем, был ли отправлен POST-запрос
         if form.validate_on_submit():  # Проверяем, что форма валидн
             point_A = form.location_A.data  # Получаем данные из поля location_A
-            point_B = form.location_B.data
-            k_A = get_loc_code_by_coords(point_A)[0]  # Получаем код местоположения по координатам
-            k_B = get_loc_code_by_coords(point_B)
-            response_A = get_weather_data(k_A)  # Получаем данные о погоде
-            response_B = get_weather_data(k_B)  # Получаем данные о погоде
-            analize = check_bad_weather(response)  # Анализируем данные о погоде
-            return jsonify(analize)  # Возвращаем анализ в формате JSON
+            point_B = form.location_B.data # Получаем данные из поля location_B
+            k_A = get_loc_code_by_coords(req(point_A))[0]  # Получаем код местоположения по координатам A
+            k_B = get_loc_code_by_coords(req(point_B))[0] # Получаем код местоположения по координатам B
+            response_A = get_weather_data(k_A)  # Получаем данные о погоде A
+            response_B = get_weather_data(k_B)  # Получаем данные о погоде B
+            print(response_B)
+            analize_A = check_bad_weather(response_A)  # Анализируем данные о погоде A
+            analize_B = check_bad_weather(response_B)  # Анализируем данные о погоде A
+            weather_data = {
+            f'Анализ погодных условий в городе: {point_A}':{
+            'temperature_celsius': response_A['temperature_celsius'],
+            'precipitation_probability': response_A['precipitation_probability'],
+            'humidity_percentage': response_A['humidity_percentage'],
+            'wind_speed': response_A['wind_speed'],
+            'analyze': analize_A
+            },
+
+            f'Анализ погодных условий в городе: {point_B}':{
+            'temperature_celsius': response_B['temperature_celsius'],
+            'precipitation_probability': response_B['precipitation_probability'],
+            'humidity_percentage': response_B['humidity_percentage'],
+            'wind_speed': response_B['wind_speed'],
+            'analyze': analize_B}
+            }
+            return render_template('weather.html', data=weather_data)  # Отображаем данные о погоде
     return render_template('main.html', form=form)  # Отображаем форму при GET-запросе
 
 
