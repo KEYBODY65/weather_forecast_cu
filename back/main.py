@@ -1,6 +1,6 @@
-from flask import Flask, jsonify, json
+from flask import Flask, jsonify
 from req import req, get_weather_data, get_loc_code_by_coords
-
+from check_models import check_bad_weather
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = ""
@@ -9,7 +9,8 @@ app.config["SECRET_KEY"] = ""
 def main():
     g = req('Москва')
     k = get_loc_code_by_coords(g)[0]
-    return json.dumps(get_weather_data(k), indent=4)
+    response = get_weather_data(k)
+    return jsonify(response)
 
 
 
