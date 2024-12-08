@@ -3,7 +3,7 @@ from req import req, get_weather_data, get_loc_code_by_coords
 
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = ""
+app.config["SECRET_KEY"] = "yfdwk64qowyerhr124429478293"
 
 @app.route("/")
 def main():
