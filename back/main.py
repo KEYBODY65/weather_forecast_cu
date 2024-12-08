@@ -4,7 +4,7 @@ from check_models import check_bad_weather
 from forms.main_form import LocationForm
 
 app = Flask(__name__, template_folder='/home/misha/Документы/Python_Projects/weather-forecast/templates', static_folder='/home/misha/Документы/Python_Projects/weather-forecast/static')
-app.config["SECRET_KEY"] = "yfdwk64qowyerhr124429478293"
+app.config["SECRET_KEY"] = ""
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
@@ -18,7 +18,6 @@ def main():
             k_B = get_loc_code_by_coords(req(point_B))[0] # Получаем код местоположения по координатам B
             response_A = get_weather_data(k_A)  # Получаем данные о погоде A
             response_B = get_weather_data(k_B)  # Получаем данные о погоде B
-            print(response_B)
             analize_A = check_bad_weather(response_A)  # Анализируем данные о погоде A
             analize_B = check_bad_weather(response_B)  # Анализируем данные о погоде A
             weather_data = {

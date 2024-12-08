@@ -1,5 +1,5 @@
 import requests
-API_KEY = '5SZCug5qTPnRKDRHRTf493qAuGzz5LoM'
+API_KEY = ''
 
 
 

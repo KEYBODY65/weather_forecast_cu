@@ -9,5 +9,5 @@ def check_bad_weather(wet_info:dict):
     elif wet_info['precipitation_probability'] > 70:
         return 'Высокая вероятность осадков, не забудьте захватить с собой зонтик'
     else:
-        return 'Самле лучшее время для прогулки'
+        return 'Самое лучшее время для прогулки'
     
